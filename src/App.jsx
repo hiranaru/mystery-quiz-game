@@ -2,7 +2,7 @@ import { useState } from "react";
 import StartScreen from "./components/StartScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
-import { questions } from "./data/questions";
+import questions from "./data/questions.js";
 
 export default function App() {
   const [screen, setScreen] = useState("start");
