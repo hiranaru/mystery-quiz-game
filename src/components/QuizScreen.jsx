@@ -1,28 +1,20 @@
 import { useState } from 'react';
 
-export default function QuizScreen({ questions, onAnswer, onFinish }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function QuizScreen({ question, onAnswer }) {
   const [showHint, setShowHint] = useState(false);
 
-  const currentQuestion = questions[currentIndex];
-
   const handleAnswer = (choice) => {
-    onAnswer(choice, currentQuestion.answer);
+    const isCorrect = choice === question.answer;
+    onAnswer(isCorrect);
     setShowHint(false);
-
-    if (currentIndex + 1 < questions.length) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      onFinish();
-    }
   };
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.question}>{currentQuestion.question}</h2>
+      <h2 style={styles.question}>{question.question}</h2>
 
       <ul style={styles.choices}>
-        {currentQuestion.choices.map((choice, i) => (
+        {question.choices.map((choice, i) => (
           <li key={i}>
             <button onClick={() => handleAnswer(choice)} style={styles.button}>
               {choice}
@@ -34,11 +26,13 @@ export default function QuizScreen({ questions, onAnswer, onFinish }) {
       {!showHint ? (
         <button onClick={() => setShowHint(true)} style={styles.hintButton}>ヒントを見る</button>
       ) : (
-        <p style={styles.hint}>💡 ヒント: {currentQuestion.hint}</p>
+        <p style={styles.hint}>💡 ヒント: {question.hint}</p>
       )}
     </div>
   );
 }
+
+// 以下、styles オブジェクトはそのままでOK
 
 const styles = {
   container: {
