@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './styles.css'; // ← これが必要！
 import StartScreen from "./components/StartScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
