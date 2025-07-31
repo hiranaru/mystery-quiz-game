@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './styles.css'; // ← これが必要！
+import './styles.css';
 import StartScreen from "./components/StartScreen";
 import QuizScreen from "./components/QuizScreen";
 import ResultScreen from "./components/ResultScreen";
@@ -31,13 +31,12 @@ export default function App() {
   return (
     <div className="app-wrapper">
       {/* 背景や固定メニュー */}
-      <div className="background">
-        <div className="logo">🕵️‍♀️ Mystery Quiz</div>
-        <div className="menu">Menu</div>
-      </div>
+      <div className="background" />
+      <div className="logo">🕵️‍♀️ Mystery Quiz</div>
+      <div className="menu">Menu</div>
 
       {/* スマホ幅のスクロールコンテンツ */}
-      <div className="content">
+      <div className="content fade-in">
         {screen === "start" && <StartScreen onStart={handleStart} />}
         {screen === "quiz" && (
           <QuizScreen
