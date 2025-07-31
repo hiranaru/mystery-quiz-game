@@ -1,0 +1,49 @@
+/* App全体の構成 */
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #111;
+}
+
+/* 背景・ロゴ・メニューなど */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background: url('/bg.jpg') center/cover no-repeat;
+}
+
+.logo {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.menu {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* スマホ幅のコンテンツ */
+.content {
+  position: relative;
+  z-index: 1;
+  background: white;
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
