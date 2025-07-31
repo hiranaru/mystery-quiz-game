@@ -28,21 +28,30 @@ export default function App() {
   };
 
   return (
-    <>
-      {screen === "start" && <StartScreen onStart={handleStart} />}
-      {screen === "quiz" && (
-        <QuizScreen
-          question={questions[currentQuestionIndex]}
-          onAnswer={handleAnswer}
-        />
-      )}
-      {screen === "result" && (
-        <ResultScreen
-          score={score}
-          total={questions.length}
-          onRestart={() => setScreen("start")}
-        />
-      )}
-    </>
+    <div className="app-wrapper">
+      {/* 背景や固定メニュー */}
+      <div className="background">
+        <div className="logo">🕵️‍♀️ Mystery Quiz</div>
+        <div className="menu">Menu</div>
+      </div>
+
+      {/* スマホ幅のスクロールコンテンツ */}
+      <div className="content">
+        {screen === "start" && <StartScreen onStart={handleStart} />}
+        {screen === "quiz" && (
+          <QuizScreen
+            question={questions[currentQuestionIndex]}
+            onAnswer={handleAnswer}
+          />
+        )}
+        {screen === "result" && (
+          <ResultScreen
+            score={score}
+            total={questions.length}
+            onRestart={() => setScreen("start")}
+          />
+        )}
+      </div>
+    </div>
   );
 }
