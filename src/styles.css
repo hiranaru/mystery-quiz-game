@@ -46,4 +46,21 @@
   height: 100vh;
   overflow-y: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  /* ▼ スクロールバー非表示 */
+  scrollbar-width: none; /* Firefox */
+}
+.content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ▼ グローバルにスクロールバーを非表示にする場合（任意） */
+body {
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
