@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import questions from '../data/questions.json';
 
-export default function QuizScreen({ onAnswer, onFinish }) {
+export default function QuizScreen({ questions, onAnswer, onFinish }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
