@@ -1,0 +1,18 @@
+const questions = [
+  {
+    id: 1,
+    question: "空を飛べる動物は？",
+    choices: ["犬", "猫", "鳥", "ウサギ"],
+    answer: "鳥",
+    hint: "翼を持つ生き物"
+  },
+  {
+    id: 2,
+    question: "1年は何ヶ月？",
+    choices: ["10", "11", "12", "13"],
+    answer: "12",
+    hint: "カレンダーを見て"
+  }
+];
+
+export default questions;
