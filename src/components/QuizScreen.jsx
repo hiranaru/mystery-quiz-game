@@ -1,25 +1,16 @@
 import { useState } from 'react';
 
-export default function QuizScreen({ question, onAnswer }) {
+export default function QuizScreen({ question, onNext }) {
+  const [selected, setSelected] = useState(null);
   const [showHint, setShowHint] = useState(false);
-  const [selectedChoice, setSelectedChoice] = useState(null);
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+
+  const isAnswered = selected !== null;
+  const isCorrect = selected === question.answer;
 
   const handleAnswer = (choice) => {
-    if (isAnswered) return;
-
-    setSelectedChoice(choice);
-    const correct = choice === question.answer;
-    setIsCorrect(correct);
-    setIsAnswered(true);
-  };
-
-  const handleNext = () => {
-    setShowHint(false);
-    setSelectedChoice(null);
-    setIsAnswered(false);
-    onAnswer(isCorrect);
+    if (!isAnswered) {
+      setSelected(choice);
+    }
   };
 
   return (
@@ -27,48 +18,39 @@ export default function QuizScreen({ question, onAnswer }) {
       <h2 className="quiz-question">❓ {question.question}</h2>
 
       <ul className="quiz-choices">
-        {question.choices.map((choice, i) => {
-          let buttonClass = "button";
-          if (isAnswered) {
-            if (choice === question.answer) {
-              buttonClass += " correct";
-            } else if (choice === selectedChoice) {
-              buttonClass += " wrong";
-            }
-          }
-
-          return (
-            <li key={i}>
-              <button
-                className={buttonClass}
-                onClick={() => handleAnswer(choice)}
-                disabled={isAnswered}
-              >
-                {choice}
-              </button>
-            </li>
-          );
-        })}
+        {question.choices.map((choice, i) => (
+          <li key={i}>
+            <button
+              className={`button ${isAnswered ? (choice === question.answer ? 'correct' : (choice === selected ? 'incorrect' : '')) : ''}`}
+              onClick={() => handleAnswer(choice)}
+              disabled={isAnswered}
+            >
+              {choice}
+            </button>
+          </li>
+        ))}
       </ul>
 
-      {isAnswered && (
-        <>
-          <div className="answer-feedback">
-            {isCorrect ? "🎉 正解！" : "😢 不正解…"}
-          </div>
-          <button className="next-button" onClick={handleNext}>
-            ▶ 次へ
-          </button>
-        </>
-      )}
-
-      {!showHint && !isAnswered && (
+      {!isAnswered && !showHint && (
         <button className="hint-button" onClick={() => setShowHint(true)}>
           🔍 ヒントを見る
         </button>
       )}
+
       {showHint && !isAnswered && (
         <p className="hint-text">💡 ヒント: {question.hint}</p>
+      )}
+
+      {isAnswered && (
+        <div className="answer-feedback">
+          <p className={isCorrect ? "correct-text" : "incorrect-text"}>
+            {isCorrect ? "✅ 正解！" : "❌ 不正解"}
+          </p>
+          <p className="explanation-text">🧠 解説: {question.explanation}</p>
+          <button className="next-button" onClick={onNext}>
+            ▶️ 次へ
+          </button>
+        </div>
       )}
     </div>
   );
