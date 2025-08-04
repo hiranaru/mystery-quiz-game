@@ -204,3 +204,14 @@ body {
   color: #eee;
   margin-bottom: 2rem;
 }
+
+.next-button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  background-color: #2196f3;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
