@@ -1,23 +1,24 @@
 import { useState } from 'react';
 
-export default function QuizScreen({ question, onAnswer }) {
-  const [selected, setSelected] = useState(null);
+export default function QuizScreen({ question, onAnswer, onNext }) {
   const [showHint, setShowHint] = useState(false);
-  const [answered, setAnswered] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null);
 
-  const isCorrect = selected === question.answer;
+  const handleAnswer = (choice) => {
+    if (isAnswered) return; // 二重クリック防止
 
-  const handleSelect = (choice) => {
-    if (answered) return;
-    setSelected(choice);
-    setAnswered(true);
+    const correct = choice === question.answer;
+    setIsCorrect(correct);
+    setIsAnswered(true);
+    onAnswer(correct);
   };
 
   const handleNext = () => {
-    onAnswer(isCorrect);
-    setSelected(null);
     setShowHint(false);
-    setAnswered(false);
+    setIsAnswered(false);
+    setIsCorrect(null);
+    onNext();
   };
 
   return (
@@ -28,17 +29,9 @@ export default function QuizScreen({ question, onAnswer }) {
         {question.choices.map((choice, i) => (
           <li key={i}>
             <button
-              className={`button ${
-                answered
-                  ? choice === question.answer
-                    ? 'correct'
-                    : choice === selected
-                    ? 'incorrect'
-                    : ''
-                  : ''
-              }`}
-              onClick={() => handleSelect(choice)}
-              disabled={answered}
+              className={`button ${isAnswered && choice === question.answer ? 'correct' : ''} ${isAnswered && choice !== question.answer ? 'disabled' : ''}`}
+              onClick={() => handleAnswer(choice)}
+              disabled={isAnswered}
             >
               {choice}
             </button>
@@ -46,26 +39,17 @@ export default function QuizScreen({ question, onAnswer }) {
         ))}
       </ul>
 
-      {!answered && !showHint && (
+      {!showHint && !isAnswered && (
         <button className="hint-button" onClick={() => setShowHint(true)}>
           🔍 ヒントを見る
         </button>
       )}
+      {showHint && <p className="hint-text">💡 ヒント: {question.hint}</p>}
 
-      {!answered && showHint && (
-        <p className="hint-text">💡 ヒント: {question.hint}</p>
-      )}
-
-      {answered && (
-        <div className="answer-feedback">
-          <p className={isCorrect ? 'correct-text' : 'incorrect-text'}>
-            {isCorrect ? '✅ 正解！' : '❌ 不正解'}
-          </p>
-          <p className="explanation-text">🧠 解説: {question.explanation}</p>
-          <button className="next-button" onClick={handleNext}>
-            ▶️ 次へ
-          </button>
-        </div>
+      {isAnswered && (
+        <button className="next-button" onClick={handleNext}>
+          👉 次へ
+        </button>
       )}
     </div>
   );
