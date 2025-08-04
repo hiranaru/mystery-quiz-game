@@ -49,13 +49,15 @@ export default function QuizScreen({ question, onAnswer, onNext }) {
 
       {showHint && <p className="hint-text">💡 ヒント: {question.hint}</p>}
 
-      {showOverlay && (
-        <div className={`answer-overlay ${isCorrect ? 'correct' : 'incorrect'}`}>
-          <h2>{isCorrect ? '✅ 正解！' : '❌ 不正解'}</h2>
-          <p>🧠 解説: {question.explanation}</p>
-          <button onClick={handleNext}>▶️ 次へ</button>
-        </div>
-      )}
+     {showOverlay && (
+  <div className="overlay-container">
+    <div className={`answer-overlay ${isCorrect ? 'correct' : 'incorrect'}`}>
+      <h2>{isCorrect ? '✅ 正解！' : '❌ 不正解'}</h2>
+      <p>🧠 解説: {question.explanation}</p>
+      <button onClick={handleNext}>▶️ 次へ</button>
+    </div>
+  </div>
+)}
     </div>
   );
 }
