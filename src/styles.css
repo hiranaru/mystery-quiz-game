@@ -215,3 +215,16 @@ body {
   border-radius: 8px;
   font-size: 1.1rem;
 }
+
+.correct-text {
+  color: green;
+  font-weight: bold;
+}
+.incorrect-text {
+  color: red;
+  font-weight: bold;
+}
+.explanation-text {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
