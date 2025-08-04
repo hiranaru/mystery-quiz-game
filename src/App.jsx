@@ -20,7 +20,9 @@ export default function App() {
     if (isCorrect) {
       setScore((prev) => prev + 1);
     }
+  };
 
+  const handleNextQuestion = () => {
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
@@ -42,6 +44,7 @@ export default function App() {
           <QuizScreen
             question={questions[currentQuestionIndex]}
             onAnswer={handleAnswer}
+            onNext={handleNextQuestion}
           />
         )}
         {screen === "result" && (
