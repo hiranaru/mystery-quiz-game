@@ -48,6 +48,7 @@ body {
 /* スマホ幅のコンテンツ */
 .content {
   position: relative;
+  overflow: hidden; /* ← スクロールバーを消したいなら */
   z-index: 1;
   background: rgba(30, 30, 30, 0.6);
   width: 100%;
@@ -242,7 +243,7 @@ body {
 
 /* === Overlay for Answer Feedback === */
 .answer-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;  /* スマホ領域内にフィット */
