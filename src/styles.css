@@ -54,6 +54,7 @@ body {
   max-width: 430px;
   height: 100vh;
   overflow-y: auto;
+  background-image: url('/bg-mystery.png'); /* ←ここがポイント！ */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
 }
